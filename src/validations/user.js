@@ -11,9 +11,17 @@ const validator = (req, res, next) => {
     next();
 }
 
-const validationAccess = [
+const validationRegister = [
+    check("username", "Username is required!").notEmpty(),
+    check("email")
+    .notEmpty().withMessage("Email is required!")
+    .isEmail().withMessage("Invalid email format!"),
+    check("password", "Password is required!").notEmpty(),
+]
+
+const validationLogin = [
     check("username", "Username is required!").notEmpty(),
     check("password", "Password is required!").notEmpty(),
 ]
 
-export { validator, validationAccess };
+export { validator, validationRegister, validationLogin };

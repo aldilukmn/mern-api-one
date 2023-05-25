@@ -1,10 +1,15 @@
 import express from "express";
-import { login, register } from "../controllers/user.js";
-import { validationAccess, validator } from "../validations/user.js"
+import { getUser, login, logout, register } from "../controllers/user.js";
+import { validationLogin, validationRegister, validator } from "../validations/user.js";
+import { verifyToken } from "../middleware/verify_token.js";
+import refreshToken from "../controllers/refresh_token.js";
 
 const router = express.Router();
 
-router.post("/register", validationAccess, validator, register);
-router.post("/login", validationAccess, validator, login);
+router.get("/users", verifyToken, getUser);
+router.post("/register", validationRegister, validator, register);
+router.post("/login", validationLogin, validator, login);
+router.get("/token", refreshToken);
+router.delete("/logout", logout);
 
 export default router;
