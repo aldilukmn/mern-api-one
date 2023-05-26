@@ -166,7 +166,7 @@ const logout = async (req, res) => {
 
   const userId = user._id;
 
-  await users.updateOne({ _id: userId }, { refresh_token: null });
+  await userModel.updateOne({ _id: userId }, { refresh_token: null });
 
   res.clearCookie("refreshToken");
 

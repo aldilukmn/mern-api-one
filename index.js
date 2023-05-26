@@ -14,8 +14,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.join(__dirname, ".env") });
 app.use(bodyParser.json());
-app.use(cors());
-app.use(cookieParser())
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+  })
+);
+app.use(cookieParser());
 app.disable("x-powered-by");
 
 // Router
